@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Services\API\ExternalServices\Weather;
+namespace App\Services\API\ExternalServices\AirQuality;
 
 use App\DTO\LocationDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
 
-class WeatherstackService
+class IQAirService
 {
     /**
      * Base Url for current weather
      */
-    protected const BASE_URL = 'http://api.weatherstack.com/current';
-
-    /**
-     * Set default metric unit to Fahrenheit
-     */
-    protected const DEFAULT_METRIC = 'f';
+    protected const BASE_URL = 'https://api.airvisual.com/v2/city';
 
     public function __construct(protected Client $httpClient)
     {
@@ -27,13 +22,14 @@ class WeatherstackService
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getCurrentWeather(LocationDTO $locationDTO)
+    public function getAirQuality(LocationDTO $locationDTO)
     {
         $response = $this->httpClient->get(static::BASE_URL, [
             'query' => [
-                'access_key' => env('WEATHERSTACK_API_KEY'),
-                'units' => static::DEFAULT_METRIC,
-                'query' => $locationDTO->getCity() . ", " . $locationDTO->getState(),
+                'key' => env('IQAIR_API_KEY'),
+                'city' => $locationDTO->getCity(),
+                'state' => $locationDTO->getState(),
+                'country' => $locationDTO->getCountry(),
             ]
         ]);
 
