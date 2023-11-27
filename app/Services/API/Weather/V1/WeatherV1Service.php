@@ -6,7 +6,7 @@ use App\Services\API\Weather\WeatherInterface;
 
 class WeatherV1Service implements WeatherInterface
 {
-    public function getWeather(): array
+    public function fetchWeather(): array
     {
         return [
             //
