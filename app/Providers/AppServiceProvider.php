@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\API\ExternalServices\Weather\WeatherstackService;
 use App\Services\API\Weather\V1\WeatherV1Service;
 use App\Services\API\Weather\WeatherInterface;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         if ($version === 'v1') {
             app()->bind(WeatherInterface::class, WeatherV1Service::class);
         }
+
+        $this->app->singleton(WeatherstackService::class, fn() => new WeatherstackService(new Client()));
     }
 
     /**
