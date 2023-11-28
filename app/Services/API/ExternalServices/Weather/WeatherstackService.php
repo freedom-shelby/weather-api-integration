@@ -14,7 +14,7 @@ class WeatherstackService
     /**
      * The API Base URL
      */
-    protected const BASE_URL = 'http://api.weatherstack.com/';
+    public const BASE_URL = 'http://api.weatherstack.com/';
 
     /**
      * Set default metric unit to Fahrenheit

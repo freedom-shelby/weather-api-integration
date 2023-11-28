@@ -12,7 +12,7 @@ class IQAirService
     /**
      * The API Base URL
      */
-    protected const BASE_URL = 'https://api.airvisual.com/v2/city';
+    public const BASE_URL = 'https://api.airvisual.com/v2/city';
 
     public function __construct(protected Client $httpClient)
     {
