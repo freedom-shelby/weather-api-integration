@@ -17,6 +17,7 @@ use ReflectionClass;
 class WeatherstackServiceTest extends TestCase
 {
     protected WeatherstackService $weatherstackService;
+    protected Client $mockedHttpClient;
 
     /**
      * @throws Exception
@@ -26,14 +27,13 @@ class WeatherstackServiceTest extends TestCase
         parent::setUp();
 
         // Create a mocked instance of GuzzleHttp\Client
-        $mockedHttpClient = $this->createMock(Client::class);
+        $this->mockedHttpClient = $this->createMock(Client::class);
 
         // Initialize the WeatherstackService instance with the mocked Client
-        $this->weatherstackService = new WeatherstackService($mockedHttpClient);
+        $this->weatherstackService = new WeatherstackService($this->mockedHttpClient);
     }
 
     /**
-     * @throws JsonException
      * @throws Exception
      */
     public function testGetCurrentWeather(): void
@@ -45,18 +45,16 @@ class WeatherstackServiceTest extends TestCase
             ],
         ];
 
-        $mockResponse = new Response(200, [], json_encode($expectedApiResponse, JSON_THROW_ON_ERROR));
+        $mockResponse = new Response(200, [], json_encode($expectedApiResponse));
 
         $locationDTO = new LocationDTO('New York', 'NY');
 
         $reflection = new ReflectionClass(WeatherstackService::class);
         $property = $reflection->getProperty('httpClient');
 
-        // Configure the mocked HttpClient's behavior for the get method
-        $httpClientMock = $this->createMock(Client::class);
-        $property->setValue($this->weatherstackService, $httpClientMock); // Set the mocked client
+        $property->setValue($this->weatherstackService, $this->mockedHttpClient);
 
-        $httpClientMock
+        $this->mockedHttpClient
             ->expects($this->once())
             ->method('get')
             ->with(

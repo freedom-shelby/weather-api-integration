@@ -15,6 +15,7 @@ use ReflectionClass;
 class IQAirServiceTest extends TestCase
 {
     protected IQAirService $iqAirService;
+    protected Client $mockedHttpClient;
 
     /**
      * @throws Exception
@@ -24,10 +25,10 @@ class IQAirServiceTest extends TestCase
         parent::setUp();
 
         // Create a mocked instance of GuzzleHttp\Client
-        $mockedHttpClient = $this->createMock(Client::class);
+        $this->mockedHttpClient = $this->createMock(Client::class);
 
         // Initialize the IQAirService instance with the mocked Client
-        $this->iqAirService = new IQAirService($mockedHttpClient);
+        $this->iqAirService = new IQAirService($this->mockedHttpClient);
     }
 
     /**
@@ -50,12 +51,9 @@ class IQAirServiceTest extends TestCase
 
         $reflection = new ReflectionClass(IQAirService::class);
         $property = $reflection->getProperty('httpClient');
+        $property->setValue($this->iqAirService, $this->mockedHttpClient); // Set the mocked client
 
-        // Configure the mocked HttpClient's behavior for the get method
-        $httpClientMock = $this->createMock(Client::class);
-        $property->setValue($this->iqAirService, $httpClientMock); // Set the mocked client
-
-        $httpClientMock
+        $this->mockedHttpClient
             ->expects($this->once())
             ->method('get')
             ->with(
