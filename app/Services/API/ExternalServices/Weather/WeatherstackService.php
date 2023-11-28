@@ -3,6 +3,8 @@
 namespace App\Services\API\ExternalServices\Weather;
 
 use App\DTO\LocationDTO;
+use App\Enums\API\WeatherstackMetrics;
+use App\Enums\API\WeatherstackPaths;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
@@ -10,14 +12,14 @@ use JsonException;
 class WeatherstackService
 {
     /**
-     * Base Url for current weather
+     * The API Base URL
      */
-    protected const BASE_URL = 'http://api.weatherstack.com/current';
+    protected const BASE_URL = 'http://api.weatherstack.com/';
 
     /**
      * Set default metric unit to Fahrenheit
      */
-    protected const DEFAULT_METRIC = 'f';
+    protected const DEFAULT_METRIC = WeatherstackMetrics::Fahrenheit;
 
     public function __construct(protected Client $httpClient)
     {
@@ -29,14 +31,19 @@ class WeatherstackService
      */
     public function getCurrentWeather(LocationDTO $locationDTO)
     {
-        $response = $this->httpClient->get(static::BASE_URL, [
+        $response = $this->httpClient->get(static::BASE_URL . WeatherstackPaths::Current->value, [
             'query' => [
                 'access_key' => env('WEATHERSTACK_API_KEY'),
-                'units' => static::DEFAULT_METRIC,
+                'units' => static::DEFAULT_METRIC->value,
                 'query' => $locationDTO->getCity() . ", " . $locationDTO->getState(),
             ]
         ]);
 
         return json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    public function getWeatherDescriptionAsString(array $descriptions): string
+    {
+        return implode(', ', $descriptions);
     }
 }

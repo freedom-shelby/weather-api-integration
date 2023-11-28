@@ -10,7 +10,7 @@ use JsonException;
 class IQAirService
 {
     /**
-     * Base Url for current weather
+     * The API Base URL
      */
     protected const BASE_URL = 'https://api.airvisual.com/v2/city';
 
