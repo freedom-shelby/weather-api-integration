@@ -41,7 +41,7 @@ class WeatherV1Service implements WeatherInterface
                 $weatherData[WeatherstackPaths::Current->value]['weather_descriptions']
             ),
             "humidity_percent" => $weatherData[WeatherstackPaths::Current->value]['humidity'],
-            "air_quality_description" => $this->aQIBasicsMapper->getHRDescriptionFromIndex(
+            "air_quality_description" => $this->aQIBasicsMapper->getHRTitleFromIndex(
                 $airQualityData['data']['current']['pollution']['aqius']
             )
         ];

@@ -9,7 +9,7 @@ class AQIBasicsMapper
     /**
      * Get Human-Readable Levels of Concern from pollution index
      */
-    public function getHRDescriptionFromIndex(int $index): string
+    public function getHRTitleFromIndex(int $index): string
     {
         return match (true) {
             $index <= AirQualityIndexes::Good->value => AirQualityIndexes::Good->title(),
