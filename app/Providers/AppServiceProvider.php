@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\API\ExternalServices\AirQuality\IQAirService;
 use App\Services\API\ExternalServices\Weather\WeatherstackService;
 use App\Services\API\Weather\V1\WeatherV1Service;
 use App\Services\API\Weather\WeatherInterface;
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->singleton(WeatherstackService::class, fn() => new WeatherstackService(new Client()));
+        $this->app->singleton(IQAirService::class, fn() => new IQAirService(new Client()));
     }
 
     /**
