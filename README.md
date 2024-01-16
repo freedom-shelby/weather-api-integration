@@ -68,13 +68,3 @@ Modern weather services have evolved to provide multiple features, including his
 4. [Weatherstack](https://weatherstack.com/documentation#current_weather) official API documentation. The above Postman collection is a modified version of the official documentation that is simplified to only include what you need to complete this assignment.
 5. [Laravel Documentation](https://laravel.com/docs/10.x/installation)
 
-### Disclaimer
-
-The scenario simply provides a story that combines the interview requirements and project tasks. It is not indicative of the day-to-day work environment at Solar Insure. Hopefully it gave you a laugh before beginning your interview assignment. You got this. 
-
-
-### CodeSubmit
-
-Please organize, design, test, and document your code as if it were going into production - then push your changes to the master branch.
-
-Have fun coding! 🚀
