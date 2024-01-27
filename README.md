@@ -2,14 +2,6 @@
 
 Your assignment is to build an internal API for a fake weather and air quality widget using PHP and Laravel.
 
-### Scenario
-
-Here at Solar Widget Co., our goal is to help everyone adopt green energy best practices to provide a healthier tomorrow for our children. To help our customers understand this goal, we have decided to release a new current weather and air quality widget. This widget was so beloved by our internal staff, that we couldn't decide where to launch the widget. That's when you, our newest developer, suggested we make an internal API that shares the data with any platform that requests it. 
-
-Everyone celebrated the genius answer! "Thank you for volunteering to write this magical tool," a smiling project manager says as he shakes your hand. Before walking away, he politely informs you that you have two weeks to build an initial version of the feature that our development team can expand on when the inevitable future requests roll in. You assure him that won't be a problem. He then reminds you that due to IT VPN limitations, you'll only have four hours to write the widget within the two week time frame, because "we have to share bandwidth space or something."
-
-The project manager walks off whistling a happy tune leaving you in your chair to figure out how to build this widget. Listed below are the notes you eventually get approved by your project manager and the project stakeholders in the original meeting.
-
 ### Brief
 
 Modern weather services have evolved to provide multiple features, including historical weather data, forecast data, "feels like" indicators, pollution statistics and more. Today, your task is to build the basic HTTP API around two popular features in modern weather services: current weather data and an air quality indicator. Imagine you are new to the development team, and your backend API design will be immediately used by the rest of your team in future sprints for the foresable future. You also know that the API will be consumed by multiple frontends (web, iOS, Android etc). In order to make the best first impression with your team mates, you want to build a simple, yet scalable solution that will be a pleasure to work with.
